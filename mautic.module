@@ -57,4 +57,3 @@ function mautic_page_attachments(array &$page) {
     ];
   }
 }
-
