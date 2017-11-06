@@ -40,7 +40,7 @@ class MauticAdminSettingsForm extends ConfigFormBase {
 
     $form['general']['mautic_enable'] = [
       '#type' => 'checkbox',
-      '#title' => t('Include Mautic Javascript Code'),
+      '#title' => $this->t('Include Mautic Javascript Code'),
       '#default_value' => $config->get('mautic_enable'),
       '#description' => $this->t("If you want to embed the Mautic Javascript Code, enable this check."),
       '#required' => FALSE,
@@ -50,11 +50,11 @@ class MauticAdminSettingsForm extends ConfigFormBase {
       '#type' => 'textfield',
       '#title' => $this->t('Mautic URL'),
       '#default_value' => $config->get('mautic_base_url'),
-      '#states' => array(
-        'visible' => array(
-          ':input[name="mautic_enable"]' => array('checked' => TRUE),
-        ),
-      ),
+      '#states' => [
+        'visible' => [
+          ':input[name="mautic_enable"]' => ['checked' => TRUE],
+        ],
+      ],
       '#size' => 60,
       '#description' => $this->t("Your Mautic javascript code. Example: http(s)://yourmautic.com/mtc.js"),
       '#required' => TRUE,
@@ -74,7 +74,7 @@ class MauticAdminSettingsForm extends ConfigFormBase {
 
     // Check if is a valid url.
     if (!$url_is_valid) {
-      $form_state->setErrorByName('mautic_base_url', t('The URL is not valid.'));
+      $form_state->setErrorByName('mautic_base_url', $this->t('The URL is not valid.'));
     }
   }
 
@@ -90,4 +90,5 @@ class MauticAdminSettingsForm extends ConfigFormBase {
 
     parent::submitForm($form, $form_state);
   }
+
 }

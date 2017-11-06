@@ -7,7 +7,6 @@
  * Adds the required Javascript to all your Drupal pages to allow tracking by
  * the Mautic statistics package.
  *
- * @author: jarodriguez <https://www.drupal.org/user/1551452>
  */
 
 use Drupal\Core\Routing\RouteMatchInterface;
@@ -58,3 +57,4 @@ function mautic_page_attachments(array &$page) {
     ];
   }
 }
+
