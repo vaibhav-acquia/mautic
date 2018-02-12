@@ -60,6 +60,53 @@ class MauticAdminSettingsForm extends ConfigFormBase {
       '#required' => TRUE,
     ];
 
+    $form['tracking_page'] = [
+      '#type' => 'vertical_tabs',
+      '#title' => $this->t('Tracking Page'),
+    ];
+
+    $mautic_pages_list = $config->get('visibility.request_path_pages');
+
+    $form['tracking']['page_visibility_settings'] = [
+      '#type' => 'details',
+      '#title' => $this->t('Pages'),
+      '#group' => 'tracking_page',
+    ];
+
+    if ($config->get('visibility.request_path_mode') == 2) {
+      $form['tracking']['page_visibility_settings'] = [];
+      $form['tracking']['page_visibility_settings']['mautic_visibility_request_path_mode'] = ['#type' => 'value', '#value' => 2];
+      $form['tracking']['page_visibility_settings']['mautic_visibility_request_path_pages'] = ['#type' => 'value', '#value' => $mautic_pages_list];
+    }
+    else {
+      $options = [
+        $this->t('Every page except the listed pages'),
+        $this->t('The listed pages only'),
+      ];
+      $description = $this->t("Specify pages by using their paths. Enter one path per line. The '*' character is a wildcard. Example paths are %blog for the blog page and %blog-wildcard for every personal blog. %front is the front page.",
+        [
+          '%blog' => '/blog',
+          '%blog-wildcard' => '/blog/*',
+          '%front' => '<front>',
+        ]
+      );
+      $title = $this->t('Pages');
+      $form['tracking']['page_visibility_settings']['mautic_visibility_request_path_mode'] = [
+        '#type' => 'radios',
+        '#title' => $this->t('Add tracking to specific pages'),
+        '#options' => $options,
+        '#default_value' => $config->get('visibility.request_path_mode'),
+      ];
+      $form['tracking']['page_visibility_settings']['mautic_visibility_request_path_pages'] = [
+        '#type' => 'textarea',
+        '#title' => $title,
+        '#title_display' => 'invisible',
+        '#default_value' => !empty($mautic_pages_list) ? $mautic_pages_list : "/admin\n/admin/*\n/batch\n/node/add*\n/node/*/*\n/user/*/*",
+        '#description' => $description,
+        '#rows' => 10,
+      ];
+    }
+
     return parent::buildForm($form, $form_state);
   }
 
@@ -86,6 +133,8 @@ class MauticAdminSettingsForm extends ConfigFormBase {
     $config
       ->set('mautic_enable', $form_state->getValue('mautic_enable'))
       ->set('mautic_base_url', $form_state->getValue('mautic_base_url'))
+      ->set('visibility.request_path_mode', $form_state->getValue('mautic_visibility_request_path_mode'))
+      ->set('visibility.request_path_pages', $form_state->getValue('mautic_visibility_request_path_pages'))
       ->save();
 
     parent::submitForm($form, $form_state);

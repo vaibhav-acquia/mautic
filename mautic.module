@@ -12,6 +12,7 @@
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\mautic\Component\Render\MauticJavaScriptSnippet;
 use Drupal\Core\Url;
+use Drupal\Component\Utility\Unicode;
 
 /**
  * Implements hook_help().
@@ -39,8 +40,18 @@ function mautic_help($route_name, RouteMatchInterface $route_match) {
 function mautic_page_attachments(array &$page) {
 
   $config = \Drupal::config('mautic.settings');
+  $request = \Drupal::request();
 
-  if ($config->get('mautic_enable')) {
+  $status = NULL;
+  if ($exception = $request->attributes->get('exception')) {
+    $status = $exception->getStatusCode();
+  }
+  $trackable_status_codes = [
+    '403',
+    '404',
+  ];
+
+  if ($config->get('mautic_enable') && _mautic_visibility_pages() && !in_array($status, $trackable_status_codes)) {
     // Build tracker code.
     $script = "(function(w,d,t,u,n,a,m){w['MauticTrackingObject']=n;";
     $script .= "w[n]=w[n]||function(){(w[n].q=w[n].q||[]).push(arguments)},a=d.createElement(t),";
@@ -56,4 +67,43 @@ function mautic_page_attachments(array &$page) {
       'mautic_tracking_script',
     ];
   }
+}
+
+/**
+ * Tracking visibility check for pages.
+ *
+ * Based on visibility setting this function returns TRUE if JS code should
+ * be added to the current page and otherwise FALSE.
+ */
+function _mautic_visibility_pages() {
+
+  static $page_match;
+
+  if (!isset($page_match)) {
+
+    $config = \Drupal::config('mautic.settings');
+    $visibility_request_path_mode = $config->get('visibility.request_path_mode');
+    $visibility_request_path_pages = $config->get('visibility.request_path_pages');
+
+    if (!empty($visibility_request_path_pages)) {
+
+      $pages = Unicode::strtolower($visibility_request_path_pages);
+      if ($visibility_request_path_mode < 2) {
+
+        $path = \Drupal::service('path.current')->getPath();
+        $path_alias = Unicode::strtolower(\Drupal::service('path.alias_manager')->getAliasByPath($path));
+        $page_match = \Drupal::service('path.matcher')->matchPath($path_alias, $pages) || (($path != $path_alias) && \Drupal::service('path.matcher')->matchPath($path, $pages));
+
+        $page_match = !($visibility_request_path_mode xor $page_match);
+      }
+      else {
+        $page_match = FALSE;
+      }
+    }
+    else {
+      $page_match = TRUE;
+    }
+  }
+
+  return $page_match;
 }
