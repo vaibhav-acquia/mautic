@@ -4,3 +4,4 @@ description: 'Allows your site to be tracked by Mautic by adding a Javascript tr
 package: Statistics
 core: 8.x
 configure: mautic.admin_settings_form
+core_version_requirement: ^8 || ^9
