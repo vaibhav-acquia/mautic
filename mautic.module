@@ -90,7 +90,7 @@ function _mautic_visibility_pages() {
       if ($visibility_request_path_mode < 2) {
 
         $path = \Drupal::service('path.current')->getPath();
-        $path_alias = mb_strtolower(\Drupal::service('path.alias_manager')->getAliasByPath($path));
+        $path_alias = mb_strtolower(\Drupal::service('path_alias.manager')->getAliasByPath($path));
         $page_match = \Drupal::service('path.matcher')->matchPath($path_alias, $pages) || (($path != $path_alias) && \Drupal::service('path.matcher')->matchPath($path, $pages));
 
         $page_match = !($visibility_request_path_mode xor $page_match);
