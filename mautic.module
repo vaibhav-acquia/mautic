@@ -10,7 +10,6 @@
  */
 
 use Drupal\Core\Routing\RouteMatchInterface;
-use Drupal\mautic\Component\Render\MauticJavaScriptSnippet;
 use Drupal\Core\Url;
 
 /**
@@ -51,20 +50,13 @@ function mautic_page_attachments(array &$page) {
   ];
 
   if ($config->get('mautic_enable') && _mautic_visibility_pages() && !in_array($status, $trackable_status_codes)) {
-    // Build tracker code.
-    $script = "(function(w,d,t,u,n,a,m){w['MauticTrackingObject']=n;";
-    $script .= "w[n]=w[n]||function(){(w[n].q=w[n].q||[]).push(arguments)},a=d.createElement(t),";
-    $script .= "m=d.getElementsByTagName(t)[0];a.async=1;a.src=u;m.parentNode.insertBefore(a,m)";
-    $script .= "})(window,document,'script','" . $config->get('mautic_base_url') . "','mt'); ";
-    $script .= "mt('send', 'pageview');";
-
-    $page['#attached']['html_head'][] = [
-      [
-        '#tag' => 'script',
-        '#value' => new MauticJavaScriptSnippet($script),
-      ],
-      'mautic_tracking_script',
+    // Integrate mautic.
+    $mautic_settings = [
+      'base_url' => $config->get('mautic_base_url'),
     ];
+
+    $page['#attached']['drupalSettings']['mautic'] = $mautic_settings;
+    $page['#attached']['library'][] = 'mautic/mautic';
   }
 }
 
