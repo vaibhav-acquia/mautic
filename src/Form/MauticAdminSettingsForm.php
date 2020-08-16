@@ -60,6 +60,18 @@ class MauticAdminSettingsForm extends ConfigFormBase {
       '#required' => TRUE,
     ];
 
+    $form['general']['header'] = [
+      '#type' => 'checkbox',
+      '#title' => $this->t('Should the JS snippet be in the header?'),
+      '#default_value' => $config->get('header'),
+      '#states' => [
+        'visible' => [
+          ':input[name="mautic_enable"]' => ['checked' => TRUE],
+        ],
+      ],
+      '#description' => $this->t("As default the snippet is in the footer (it is recommended)"),
+    ];
+
     $form['tracking_page'] = [
       '#type' => 'vertical_tabs',
       '#title' => $this->t('Tracking Page'),
@@ -135,6 +147,7 @@ class MauticAdminSettingsForm extends ConfigFormBase {
       ->set('mautic_base_url', $form_state->getValue('mautic_base_url'))
       ->set('visibility.request_path_mode', $form_state->getValue('mautic_visibility_request_path_mode'))
       ->set('visibility.request_path_pages', $form_state->getValue('mautic_visibility_request_path_pages'))
+      ->set('header', $form_state->getValue('header'))
       ->save();
 
     parent::submitForm($form, $form_state);

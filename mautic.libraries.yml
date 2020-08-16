@@ -1,4 +1,9 @@
-mautic:
+mautic-header:
+  header: true
+  version: 1.0
+  js:
+    js/mautic.js: {}
+mautic-footer:
   version: 1.0
   js:
     js/mautic.js: {}
