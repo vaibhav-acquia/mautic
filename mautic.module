@@ -33,15 +33,12 @@ function mautic_help($route_name, RouteMatchInterface $route_match) {
 /**
  * Implements hook_page_attachments().
  *
- * Insert JavaScript to  the page.
+ * Insert JavaScript to the the page.
  */
 function mautic_page_attachments(array &$page) {
 
   $config = \Drupal::config('mautic.settings');
   $request = \Drupal::request();
-
-    // Add custom field and optional Lift integration JS code
-  $variables['#attached']['library'][] = 'mautic/customFields';
 
   // Add Mautic tracking code if needed
   $status = NULL;
@@ -62,12 +59,13 @@ function mautic_page_attachments(array &$page) {
     $page['#attached']['drupalSettings']['mautic'] = $mautic_settings;
 
     if($config->get('header')){
-        $page['#attached']['library'][] = 'mautic/mautic-header';
+      $page['#attached']['library'][] = 'mautic/mautic-header';
     }
     else {
-        $page['#attached']['library'][] = 'mautic/mautic-footer';
+      $page['#attached']['library'][] = 'mautic/mautic-footer';
     }
-
+    // Add custom field and optional Lift integration JS code
+    $variables['#attached']['library'][] = 'mautic/customFields';
   }
 }
 

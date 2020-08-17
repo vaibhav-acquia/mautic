@@ -15,6 +15,9 @@ mautic.settings:
     header:
       type: boolean
       label: 'Snippet in the header'
+    lift_enable:
+      type: boolean
+      label: 'Lift Integration'
     mautic_enable:
       type: boolean
       label: 'Enable the module'

@@ -72,6 +72,19 @@ class MauticAdminSettingsForm extends ConfigFormBase {
       '#description' => $this->t("As default the snippet is in the footer (it is recommended)"),
     ];
 
+    $form['general']['lift_enable'] = [
+      '#type' => 'checkbox',
+      '#title' => $this->t('Include Lift Integration Javascript Code'),
+      '#default_value' => $config->get('lift_enable'),
+      '#description' => $this->t("If you want to embed the Lift Integration Javascript Code, enable this check."),
+      '#required' => FALSE,
+      '#states' => [
+        'visible' => [
+          ':input[name="mautic_enable"]' => ['checked' => TRUE],
+        ],
+      ],
+    ];
+
     $form['tracking_page'] = [
       '#type' => 'vertical_tabs',
       '#title' => $this->t('Tracking Page'),
@@ -148,6 +161,7 @@ class MauticAdminSettingsForm extends ConfigFormBase {
       ->set('visibility.request_path_mode', $form_state->getValue('mautic_visibility_request_path_mode'))
       ->set('visibility.request_path_pages', $form_state->getValue('mautic_visibility_request_path_pages'))
       ->set('header', $form_state->getValue('header'))
+      ->set('lift_enable', $form_state->getValue('lift_enable'))
       ->save();
 
     parent::submitForm($form, $form_state);

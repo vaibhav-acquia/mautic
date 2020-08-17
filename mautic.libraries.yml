@@ -8,5 +8,6 @@ mautic-footer:
   js:
     js/mautic.js: {}
 customFields:
+  version: 1.0
   js:
     js/mautic.customFields.js: {}
