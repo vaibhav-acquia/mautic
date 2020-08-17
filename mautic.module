@@ -40,6 +40,10 @@ function mautic_page_attachments(array &$page) {
   $config = \Drupal::config('mautic.settings');
   $request = \Drupal::request();
 
+    // Add custom field and optional Lift integration JS code
+  $variables['#attached']['library'][] = 'mautic/customFields';
+
+  // Add Mautic tracking code if needed
   $status = NULL;
   if ($exception = $request->attributes->get('exception')) {
     $status = $exception->getStatusCode();

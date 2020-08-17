@@ -7,3 +7,6 @@ mautic-footer:
   version: 1.0
   js:
     js/mautic.js: {}
+customFields:
+  js:
+    js/mautic.customFields.js: {}
