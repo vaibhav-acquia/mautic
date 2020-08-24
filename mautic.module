@@ -68,7 +68,7 @@ function mautic_page_attachments(array &$page) {
     if($config->get('lift_enable')) {
       $moduleHandler = \Drupal::service('module_handler');
       if ($moduleHandler->moduleExists('acquia_lift')) {
-        $variables['#attached']['library'][] = 'mautic/customFields';
+        $page['#attached']['library'][] = 'mautic/customFields';
       }
     }
   }

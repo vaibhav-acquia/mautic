@@ -44,7 +44,8 @@ class LiftCustomFieldTest extends BrowserTestBase
   public static $modules = [
     'mautic',
     'node',
-    'user'
+    'user',
+    'acquia_lift'
   ];
 
   /**
