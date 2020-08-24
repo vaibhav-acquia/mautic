@@ -1,7 +1,7 @@
 /**
  * @file mautic.customFields.js
- * Pushes site and Lift info to custom fields in Mautic
- * 
+ * Pushes site and Acquia Personalization info to custom fields in Mautic
+ *
  */
 (function (Drupal) {
 
@@ -9,11 +9,11 @@
 
   /**
    * Adds data to these custom fields in Mautic:
-   *  scenario, site_url, lift_account, lift_segments
+   *  site_url, lift_account, lift_segments
    */
   Drupal.behaviors.mauticCustomFields = {
     attach: function (context) {
-      // Add DF custom field data
+      // Add custom field data
       mt('send', 'pageview', {
         site_url: window.location.hostname
       },
@@ -24,7 +24,7 @@
         }
       );
 
-      // Wait until Lift has finished to add the Lift segments
+      // Wait until Personalization has finished to add the Personalization segments
       window.addEventListener('acquiaLiftStageCollection', function (e) {
         mt('send', 'pageview', {
           lift_account: AcquiaLift.account_id,
@@ -32,7 +32,7 @@
         },
           {
             onerror: function () {
-              console.log("Mautic - error adding custom field data from Lift.");
+              console.log("Mautic - error adding custom field data from Personalization.");
             }
           }
         );
@@ -44,13 +44,13 @@
 }(Drupal));
 
 /**
- * A helper function for preparing the Lift Segments object for a text field.
+ * A helper function for preparing the Personalization Segments object for a text field.
  */
 function acquiaLiftSegmentsToString() {
   let liftSegmentsExist = typeof AcquiaLift.currentSegments === 'object';
   let liftSegments = '';
   if (liftSegmentsExist) {
-    // Convert the Lift Segments from an object to a string of ids
+    // Convert the Personalization Segments from an object to a string of ids
     Object.values(AcquiaLift.currentSegments).forEach(value => {
       liftSegments += value.id + ',';
     });

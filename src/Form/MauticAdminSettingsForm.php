@@ -72,18 +72,21 @@ class MauticAdminSettingsForm extends ConfigFormBase {
       '#description' => $this->t("As default the snippet is in the footer (it is recommended)"),
     ];
 
-    $form['general']['lift_enable'] = [
-      '#type' => 'checkbox',
-      '#title' => $this->t('Include Lift Integration Javascript Code'),
-      '#default_value' => $config->get('lift_enable'),
-      '#description' => $this->t("If you want to embed the Lift Integration Javascript Code, enable this check."),
-      '#required' => FALSE,
-      '#states' => [
-        'visible' => [
-          ':input[name="mautic_enable"]' => ['checked' => TRUE],
+    $moduleHandler = \Drupal::service('module_handler');
+    if ($moduleHandler->moduleExists('acquia_lift')){
+      $form['general']['lift_enable'] = [
+        '#type' => 'checkbox',
+        '#title' => $this->t('Include Acquia Personalization Integration Javascript Code'),
+        '#default_value' => $config->get('lift_enable'),
+        '#description' => $this->t("If you want to embed the Acquia Personalization Integration Javascript Code, enable this check."),
+        '#required' => FALSE,
+        '#states' => [
+          'visible' => [
+            ':input[name="mautic_enable"]' => ['checked' => TRUE],
+          ],
         ],
-      ],
-    ];
+      ];
+    }
 
     $form['tracking_page'] = [
       '#type' => 'vertical_tabs',

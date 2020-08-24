@@ -27,9 +27,9 @@ All pages will now have the required JavaScript added to the
 HTML header can confirm this by viewing the page source from
 your browser.
 
-Acquia Lift integration
+Acquia Personalization integration
 =======================
-This module can automatically send the user's Lift data into Mautic **IF** you create the [custom fields](https://docs.mautic.org/en/contacts/manage-custom-fields "custom fields") for the data to be added to your contacts. 
+This module can automatically send the user's Personalization data into Mautic **IF** you create the [custom fields](https://docs.mautic.org/en/contacts/manage-custom-fields "custom fields") for the data to be added to your contacts.
 
 Please note that the below machine names (like lift_segments) are the *alias* for the custom field. The label can be anything you like. Add any or all of these fields to get access to the data as part of the Mautic contact:
 #### site_url
