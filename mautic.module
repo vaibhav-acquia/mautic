@@ -33,7 +33,7 @@ function mautic_help($route_name, RouteMatchInterface $route_match) {
 /**
  * Implements hook_page_attachments().
  *
- * Insert JavaScript to the the page.
+ * Insert JavaScript to the page.
  */
 function mautic_page_attachments(array &$page) {
 
