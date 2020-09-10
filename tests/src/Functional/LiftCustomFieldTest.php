@@ -6,6 +6,11 @@ use Drupal\Core\Config\Config;
 use Drupal\Core\Url;
 use Drupal\Tests\BrowserTestBase;
 
+/**
+ * Functional tests for the Mautic module.
+ *
+ * @group mautic
+ */
 class LiftCustomFieldTest extends BrowserTestBase
 {
   /**
