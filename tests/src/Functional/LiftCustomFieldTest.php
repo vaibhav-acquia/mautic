@@ -9,6 +9,7 @@ use Drupal\Tests\BrowserTestBase;
 /**
  * Functional tests for the Mautic module.
  *
+ * @requires module acquia_lift
  * @group mautic
  */
 class LiftCustomFieldTest extends BrowserTestBase
