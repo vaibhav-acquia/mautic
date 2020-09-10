@@ -28,6 +28,7 @@ class LiftCustomFieldTest extends BrowserTestBase
    * Perform initial setup tasks that run before every test method.
    */
   public function setUp() {
+    $this->checkRequirements();
     parent::setUp();
     // Mautic settings
     $this->config = \Drupal::configFactory()->getEditable('mautic.settings');
@@ -56,8 +57,6 @@ class LiftCustomFieldTest extends BrowserTestBase
 
   /**
    * Test the path with the Acquia Personalization Integration snippet
-   *
-   * @requires module acquia_lift
    */
   public function testPathWithLiftSnippet()
   {
@@ -83,8 +82,6 @@ class LiftCustomFieldTest extends BrowserTestBase
 
   /**
    * Test the path without the Acquia Personalization Integration snippet
-   *
-   * @requires module acquia_lift
    */
   public function testPathWithoutLiftSnippet()
   {
