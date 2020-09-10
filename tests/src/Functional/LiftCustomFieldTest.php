@@ -56,6 +56,8 @@ class LiftCustomFieldTest extends BrowserTestBase
 
   /**
    * Test the path with the Acquia Personalization Integration snippet
+   *
+   * @requires module acquia_lift
    */
   public function testPathWithLiftSnippet()
   {
@@ -81,6 +83,8 @@ class LiftCustomFieldTest extends BrowserTestBase
 
   /**
    * Test the path without the Acquia Personalization Integration snippet
+   *
+   * @requires module acquia_lift
    */
   public function testPathWithoutLiftSnippet()
   {
