@@ -1,0 +1,45 @@
+<?php
+
+/**
+ * @file
+ * Contains mautic_blocks.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function mautic_blocks_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    case 'help.page.mautic_blocks':
+      $output = '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Mautic blocks adds the ability to easily embed Mautic forms and focus items into a site as blocks.') . '</p>';
+      return $output;
+
+  }
+}
+
+/**
+ * Implements hook_theme() for Mautic block templates.
+ */
+function mautic_blocks_theme() {
+  return [
+    'mautic_forms' => [
+      'variables' => [
+        'mautic_instance' => NULL,
+        'mautic_id' => NULL,
+        'embed' => NULL,
+        'iframe_width' => NULL,
+        'iframe_height' => NULL,
+        'iframe_border' => NULL,
+      ],
+    ],
+    'mautic_focus' => [
+      'variables' => [
+        'mautic_instance' => NULL,
+        'mautic_id' => NULL,
+      ],
+    ],
+  ];
+}

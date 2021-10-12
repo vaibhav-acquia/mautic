@@ -1,0 +1,29 @@
+{#
+/**
+  * @file
+  * Template for Mautic form block.
+  *
+  * Available variables:
+  * - mautic_instance: Mautic instance hostname.
+  * - mautic_id: Mautic form id.
+  * - embed: Type of embed to do (js or iframe)
+  * - iframe_width: Mautic form iframe width.
+  * - iframe_height: Mautic form iframe height.
+  * - iframe_border: Show Mautic form iframe border.
+  */
+#}
+
+{%
+  set classes = [
+    'mautic',
+    iframe_border ? '' : 'noborder',
+  ]
+%}
+
+{# Check for an iframe embed #}
+{% if embed == 'iframe' %}
+  <iframe {{ attributes.addClass(classes) }} src="//{{ mautic_instance }}/form/{{ mautic_id}}" width={{ iframe_width }}px height={{ iframe_height }}px ><p>Your browser does not support iframes.</p></iframe>
+{# js is the default method. #}
+{% else %}
+  <script type="text/javascript" src="//{{ mautic_instance }}/form/generate.js?id={{ mautic_id }}"></script>
+{% endif %}
