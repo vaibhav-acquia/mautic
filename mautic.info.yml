@@ -3,4 +3,4 @@ type: module
 description: 'Allows your site to be tracked by Mautic by adding a Javascript tracking code to every page.'
 package: Statistics
 configure: mautic.admin_settings_form
-core_version_requirement: ^8.8 || ^9
+core_version_requirement: ^8.8 || ^9 || ^10
