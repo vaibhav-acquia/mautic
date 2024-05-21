@@ -27,7 +27,7 @@ class LiftCustomFieldTest extends BrowserTestBase
   /**
    * Perform initial setup tasks that run before every test method.
    */
-  public function setUp() {
+  public function setUp(): void {
     $this->checkRequirements();
     parent::setUp();
     // Mautic settings
@@ -48,7 +48,7 @@ class LiftCustomFieldTest extends BrowserTestBase
    *
    * @var array
    */
-  public static $modules = [
+  protected static $modules = [
     'mautic',
     'node',
     'user',

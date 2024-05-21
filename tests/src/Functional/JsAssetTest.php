@@ -26,7 +26,7 @@ class JsAssetTest extends BrowserTestBase
   /**
    * Perform initial setup tasks that run before every test method.
    */
-  public function setUp() {
+  public function setUp(): void {
     parent::setUp();
     // Mautic settings
     $this->config = \Drupal::configFactory()->getEditable('mautic.settings');
@@ -46,7 +46,7 @@ class JsAssetTest extends BrowserTestBase
    *
    * @var array
    */
-  public static $modules = [
+  protected static $modules = [
     'mautic',
     'node',
     'user'
