@@ -21,7 +21,7 @@ class JsAssetTest extends BrowserTestBase
   /**
    * {@inheritdoc}
    */
-  protected $defaultTheme = 'stable';
+  protected $defaultTheme = 'stark';
 
   /**
    * Perform initial setup tasks that run before every test method.
