@@ -5,6 +5,7 @@ namespace Drupal\Tests\mautic\Functional;
 use Drupal\Core\Config\Config;
 use Drupal\Core\Url;
 use Drupal\Tests\BrowserTestBase;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Functional tests for the Mautic module.
@@ -28,6 +29,9 @@ class LiftCustomFieldTest extends BrowserTestBase
    * Perform initial setup tasks that run before every test method.
    */
   public function setUp(): void {
+    $reflector = new \ReflectionClass(TestCase::class);
+    $property = $reflector->getMethod('checkRequirements');
+    $property->setAccessible(true);
     $this->checkRequirements();
     parent::setUp();
     // Mautic settings
