@@ -5,12 +5,10 @@ namespace Drupal\Tests\mautic\Functional;
 use Drupal\Core\Config\Config;
 use Drupal\Core\Url;
 use Drupal\Tests\BrowserTestBase;
-use PHPUnit\Framework\TestCase;
 
 /**
  * Functional tests for the Mautic module.
  *
- * @requires module acquia_lift
  * @group mautic
  */
 class LiftCustomFieldTest extends BrowserTestBase
@@ -26,13 +24,21 @@ class LiftCustomFieldTest extends BrowserTestBase
   protected $defaultTheme = 'stark';
 
   /**
+   * The modules to load to run the test.
+   *
+   * @var array
+   */
+  protected static $modules = [
+    'mautic',
+    'node',
+    'user',
+    'acquia_lift'
+  ];
+
+  /**
    * Perform initial setup tasks that run before every test method.
    */
   public function setUp(): void {
-    $reflector = new \ReflectionClass(TestCase::class);
-    $property = $reflector->getMethod('checkRequirements');
-    $property->setAccessible(true);
-    $this->checkRequirements();
     parent::setUp();
     // Mautic settings
     $this->config = \Drupal::configFactory()->getEditable('mautic.settings');
@@ -46,18 +52,6 @@ class LiftCustomFieldTest extends BrowserTestBase
     // Login.
     $this->drupalLogin($user);
   }
-
-  /**
-   * The modules to load to run the test.
-   *
-   * @var array
-   */
-  protected static $modules = [
-    'mautic',
-    'node',
-    'user',
-    'acquia_lift'
-  ];
 
   /**
    * Test the path with the Acquia Personalization Integration snippet
