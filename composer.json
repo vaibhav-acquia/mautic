@@ -7,6 +7,6 @@
     "drupal/core": "^9.5 || ^10 || ^11"
   },
   "require-dev": {
-    "drupal/acquia_lift": "4.x-dev"
+    "drupal/acquia_perz": "^4.1"
   }
 }
