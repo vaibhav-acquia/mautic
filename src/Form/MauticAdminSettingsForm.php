@@ -73,7 +73,7 @@ class MauticAdminSettingsForm extends ConfigFormBase {
     ];
 
     $moduleHandler = \Drupal::service('module_handler');
-    if ($moduleHandler->moduleExists('acquia_lift')){
+    if ($moduleHandler->moduleExists('acquia_perz')){
       $form['general']['lift_enable'] = [
         '#type' => 'checkbox',
         '#title' => $this->t('Include Acquia Personalization Integration Javascript Code'),
