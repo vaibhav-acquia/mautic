@@ -67,7 +67,7 @@ function mautic_page_attachments(array &$page) {
     // Add custom field and optional Lift integration JS code\
     if($config->get('lift_enable')) {
       $moduleHandler = \Drupal::service('module_handler');
-      if ($moduleHandler->moduleExists('acquia_lift')) {
+      if ($moduleHandler->moduleExists('acquia_perz')) {
         $page['#attached']['library'][] = 'mautic/customFields';
       }
     }
