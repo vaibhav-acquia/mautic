@@ -32,7 +32,7 @@ class LiftCustomFieldTest extends BrowserTestBase
     'mautic',
     'node',
     'user',
-    'acquia_perz'
+    'acquia_perz',
   ];
 
   /**
