@@ -1,0 +1,14 @@
+{
+  "name": "drupal/mautic",
+  "description": "Mautic drupal package to track the site pages.",
+  "type": "drupal-module",
+  "license": "GPL-2.0-or-later",
+  "require-dev": {
+    "drupal/acquia_perz": "^4.1"
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-8.x-1.x": "1.x-dev"
+    }
+  }
+}
