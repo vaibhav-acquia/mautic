@@ -1,0 +1,5 @@
+blocks:
+  version: 1.x
+  css:
+    component:
+      css/mautic.blocks.css: {}

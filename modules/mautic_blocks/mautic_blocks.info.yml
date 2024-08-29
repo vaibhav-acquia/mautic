@@ -1,0 +1,8 @@
+name: Mautic Blocks
+type: module
+description: Adds the ability to easily embed Mautic forms and focus items into a site as blocks.
+core_version_requirement: ^8 || ^9 || ^10
+package: Mautic
+dependencies:
+ - mautic
+ - mautic_api
