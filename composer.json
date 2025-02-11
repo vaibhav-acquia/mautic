@@ -1,0 +1,5 @@
+{
+    "name": "drupal/mautic",
+    "description": "Provides integration with the mautic api library.",
+    "type": "drupal-module"
+}
