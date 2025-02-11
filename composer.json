@@ -2,10 +2,5 @@
   "name": "drupal/mautic",
   "type": "drupal-module",
   "keywords": ["Drupal"],
-  "homepage": "https://www.drupal.org/project/mautic",
-  "minimum-stability": "dev",
-  "support": {
-    "issues": "http://drupal.org/project/issues/mautic"
-  },
   "require": { }
 }
